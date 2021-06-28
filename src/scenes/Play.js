@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
   preload() {
     // load images/tile sprites
+    this.load.image('bonusUfo', './assets/bonusUfo.png');
     this.load.image('rocket', './assets/rocket.png');
     this.load.image('spaceship', './assets/spaceship.png');
     this.load.image('starfield', './assets/starfield.png');
@@ -27,6 +28,8 @@ class Play extends Phaser.Scene {
     this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(-2, 0);
     // add rocket (p2)
     this.p2Rocket = new Rocket2(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(2, 0);
+    // add bonusUfo
+    this.ufo = new BonusUfo(this, game.config.width + borderUISize*5.5, borderUISize*5, 'bonusUfo', 0, 50).setOrigin(0, 0);
     // add spaceships (x3)
     this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
     this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
@@ -91,12 +94,17 @@ class Play extends Phaser.Scene {
       this.starfield.tilePositionX -= 4;
       this.p1Rocket.update();             // update rocket sprite
       this.p2Rocket.update();             // update rocket2 sprite
+      this.ufo.update();                  // update ufo sprite
       this.ship01.update();               // update spaceships (x3)
       this.ship02.update();
       this.ship03.update();
     }
 
     // check collisions (p1)
+    if(this.checkCollision(this.p1Rocket, this.ufo)) {
+      this.p1Rocket.reset();
+      this.shipExplode(this.ufo);   
+    }
     if(this.checkCollision(this.p1Rocket, this.ship03)) {
       this.p1Rocket.reset();
       this.shipExplode(this.ship03);   
@@ -111,6 +119,10 @@ class Play extends Phaser.Scene {
     }
 
     // check collisions (p2)
+    if(this.checkCollision(this.p2Rocket, this.ufo)) {
+      this.p2Rocket.reset();
+      this.shipExplode(this.ufo);   
+    }
     if(this.checkCollision(this.p2Rocket, this.ship03)) {
       this.p2Rocket.reset();
       this.shipExplode(this.ship03);   

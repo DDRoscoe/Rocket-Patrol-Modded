@@ -10,6 +10,9 @@ let game = new Phaser.Game(config);
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
+// reserve menu vars
+let keyLEFT, keyRIGHT
+
 // reserve p1 vars
 let keyZ, keyX, keyC, keyV;
 
