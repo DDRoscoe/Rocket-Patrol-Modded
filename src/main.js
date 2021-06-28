@@ -11,7 +11,7 @@ let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
 // reserve menu vars
-let keyLEFT, keyRIGHT
+let keyLEFT, keyRIGHT, keyR;
 
 // reserve p1 vars
 let keyZ, keyX, keyC, keyV;
