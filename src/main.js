@@ -3,6 +3,14 @@
 // Date: 28 June, 2021
 // Estimated Time of Completion: 6-8 hours
 
+//------------ MODS -------------
+// Completed Tutorial (20)
+// Implement a simultaneous two-player Mode (30)
+// Implement a new timing/scoring mechanism that adds time to the clock for successful hits (20)
+// Create a new spaceship that's smaller, moves faster, and is worth more points (20)
+// Display time (in seconds) on the screen (10)
+//-------------------------------
+
 let config = {
     type: Phaser.AUTO,
     width: 640,
