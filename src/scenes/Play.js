@@ -116,6 +116,7 @@ class Play extends Phaser.Scene {
       this.timeLeft.text = this.displayTime;
     }
 
+    // check for countdown
     if (this.countDown == 0)
     {
       this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER').setOrigin(0.5);
