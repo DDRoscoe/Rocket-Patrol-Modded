@@ -11,6 +11,8 @@
 // Display time (in seconds) on the screen (10)
 //-------------------------------
 
+// Sources: The only outside source I used was a game asset I paid for from Unity (it was used as the bonusUfo.png)
+
 let config = {
     type: Phaser.AUTO,
     width: 640,
