@@ -9,7 +9,7 @@ class BonusUfo extends Phaser.GameObjects.Sprite {
 
     update() {
         // move ufo left
-        this.x -= this.moveSpeed + 1.5;      // +5 for increased speed
+        this.x -= this.moveSpeed + 1.5;      // +1.5 for increased speed
         // wrap around from left edge to right edge
         if (this.x <= 0 - this.width) {
             this.x = game.config.width;

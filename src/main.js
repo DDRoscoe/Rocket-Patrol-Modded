@@ -13,8 +13,8 @@ let borderPadding = borderUISize / 3;
 // reserve menu vars
 let keyLEFT, keyRIGHT, keyR;
 
-// reserve p1 vars
+// reserve Player1 vars
 let keyZ, keyX, keyC, keyV;
 
-// reserve p2 vars
+// reserve Player2 vars
 let keyH, keyJ, keyK, keyL;
