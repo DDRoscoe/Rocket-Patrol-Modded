@@ -36,6 +36,7 @@ class Play extends Phaser.Scene {
     this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
     // define menu key
     keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+    keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     // define keys (p1)
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
     keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
@@ -55,6 +56,8 @@ class Play extends Phaser.Scene {
 
     // initialize score
     this.p1Score = 0;
+    // initialize clock to display
+    this.countDown = game.settings.gameTimer / 10;
 
     // display score
     let scoreConfig = {
@@ -73,14 +76,22 @@ class Play extends Phaser.Scene {
     
     // GAME OVER flag
     this.gameOver = false;
-    
-    // 60-second play clock
+
     scoreConfig.fixedWidth = 0;
-    this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-    this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-    this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
-    this.gameOver = true;
-    }, null, this);
+
+    let timeConfig = {
+      fontFamily: 'Courier',
+      fontSize: '28px',
+      backgroundColor: '#F3B141',
+      color: '#843605',
+      align: 'right',
+      padding: {
+        top: 5,
+        bottom: 5,
+      },
+      fixedWidth:100
+    }
+    this.timeLeft = this.add.text(borderUISize + borderPadding, borderUISize*2 + borderPadding*3, this.countDown, timeConfig);
   }
 
   update() {
@@ -100,6 +111,16 @@ class Play extends Phaser.Scene {
       this.ship01.update();               // update spaceships (x3)
       this.ship02.update();
       this.ship03.update();
+      this.countDown--;                   // update time
+      this.displayTime = Math.floor(this.countDown / 100);
+      this.timeLeft.text = this.displayTime;
+    }
+
+    if (this.countDown == 0)
+    {
+      this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER').setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu').setOrigin(0.5);
+      this.gameOver = true;
     }
 
     // check collisions (p1)
@@ -168,6 +189,7 @@ class Play extends Phaser.Scene {
     // score add and repaint
     this.p1Score += ship.points;
     this.scoreLeft.text = this.p1Score;
+    this.countDown += 300;      // landing a hit adds 3 seconds
     this.sound.play('sfx_explosion');     
   }
 }
