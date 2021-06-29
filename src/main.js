@@ -1,3 +1,8 @@
+// Name: Jalen Pastor
+// Project Name: Rocket Patrol Modded
+// Date: 28 June, 2021
+// Estimated Time of Completion: 6-8 hours
+
 let config = {
     type: Phaser.AUTO,
     width: 640,
